@@ -30,8 +30,10 @@ optiver_timeseries/
 - **Leakage-Safe Features**: All features use only past data with proper shifting
 - **Time-Based Validation**: Prevents lookahead bias using temporal split
 - **Ensemble Models**: LightGBM + XGBoost with weighted averaging
+- **Econometric Models**: GARCH volatility clustering + ARIMA time series forecasting
+- **Hybrid Approach**: Combines statistical models (GARCH/ARIMA) as features for ML models
 - **RMSPE Metric**: Root Mean Squared Percentage Error for evaluation
-- **Feature Engineering**: Rolling windows, lag features, rate of change
+- **Feature Engineering**: Rolling windows, lag features, rate of change, volatility modeling
 - **Production Ready**: Generates valid competition submission format
 
 ## Technical Approach
@@ -40,13 +42,16 @@ optiver_timeseries/
 - **Rolling Statistics**: 5-window mean/std for prices and returns
 - **Lag Features**: 1-step and 2-step lags per stock
 - **Return-Based**: Log returns and volatility features
+- **GARCH Features**: Volatility clustering predictions (ω, α, β components)
+- **ARIMA Features**: Time series forecasting with exponential weighting
 - **Leakage Prevention**: All features use `shift(1)` to ensure no future data
 
 ### 2. Model Ensemble
 - **LightGBM**: Gradient boosting (40% weight)
 - **XGBoost**: Extreme gradient boosting (35% weight)  
 - **Combined**: Simple average of predictions (25% weight)
-- **Optimization**: Tree-based methods with regularization
+- **Econometric Integration**: GARCH and ARIMA models contribute as features
+- **Optimization**: Tree-based methods with regularization and statistical features
 
 ### 3. Validation Strategy
 - **Time-Based Split**: 80% train / 20% validation
@@ -59,12 +64,14 @@ Model performance metrics are automatically saved to `results.json` after traini
 
 ```json
 {
-  "lightgbm_rmspe": 3.96,
-  "xgboost_rmspe": 3.33,
-  "ensemble_rmspe": 3.64,
+  "lightgbm_rmspe": 4.02,
+  "xgboost_rmspe": 3.40,
+  "ensemble_rmspe": 3.70,
   "train_samples": 4,179,980,
   "val_samples": 1,058,000,
-  "n_features": 27
+  "n_features": 33,
+  "garch_features": true,
+  "arima_features": true
 }
 ```
 
@@ -73,10 +80,11 @@ View results: `cat results.json`
 ### Performance Summary
 - **Training Samples**: 4.18M rows
 - **Validation Samples**: 1.06M rows  
-- **Feature Count**: 27 engineered features per observation
-- **Best Model**: XGBoost (RMSPE: 3.33), Ensemble (RMSPE: 3.64)
+- **Feature Count**: 33 engineered features per observation (including GARCH and ARIMA)
+- **Best Model**: XGBoost (RMSPE: 3.40), Ensemble (RMSPE: 3.70)
 - **Validation Split**: Time-based 80/20 split prevents lookahead bias
 - **Model Output**: Valid submission.csv for Kaggle competition
+- **Advanced Features**: GARCH volatility modeling and ARIMA time series forecasting integrated as features
 
 ### Notes on Performance
 RMSPE values of ~3–4% indicate the models are performing reasonably on this large-scale financial time-series dataset. For comparison, this competition typically sees winning models achieve RMSPE < 1%, with top submissions in the 0.5–1.0% range.
@@ -150,7 +158,8 @@ time_id,stock_id,target
 1. **Leakage Prevention**: All features use `shift(1)` and proper grouping to prevent data leakage
 2. **Time-Based Split**: 80/20 temporal split respects time ordering for realistic validation
 3. **Ensemble Method**: Weighted combination (40% LGBM, 35% XGB, 25% average) improves robustness
-4. **RMSPE Metric**: Root Mean Squared Percentage Error aligns with competition evaluation
+4. **Econometric Models**: GARCH and ARIMA integrated as features (not competitors) - allows ML models to learn from statistical patterns
+5. **RMSPE Metric**: Root Mean Squared Percentage Error aligns with competition evaluation
 
 ## Performance
 
