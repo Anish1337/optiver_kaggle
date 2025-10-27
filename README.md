@@ -150,25 +150,6 @@ time_id,stock_id,target
 - lightgbm
 - xgboost
 
-## Project Highlights
-
-### Resume Bullets (Optimized for Junior Quant Dev Roles)
-
-**Option 1 - Financial Modeling Focus:**
-- **Designed and implemented realized volatility prediction pipeline** for Optiver Trading @ Close competition, processing **4.18M market data samples** with time-series cross-validation to achieve **3.33% RMSPE** on out-of-sample validation set
-- **Engineered 27 leakage-safe features** including rolling statistics (mean/std over 5-period windows), lag variables, and return-based metrics for financial time-series forecasting, ensuring temporal integrity through proper `shift()` operations
-- **Deployed ensemble model** combining LightGBM (40%) and XGBoost (35%) with weighted predictions, achieving **3.64% ensemble RMSPE** on 1.06M validation samples using time-based 80/20 split to prevent lookahead bias
-
-**Option 2 - Technical Depth Focus:**
-- **Built production ML pipeline** for financial market volatility prediction handling **4.18M training samples**, implementing leakage-prevention feature engineering with rolling windows, lag variables, and time-based validation achieving **3.33% RMSPE** on test data
-- **Developed ensemble methodology** combining gradient boosting models (LightGBM + XGBoost) with weighted averaging, processing **5.24M total observations** with 27 engineered features and time-series cross-validation on financial market data
-- **Automated data processing** with pandas/numpy for feature extraction, optimized hyperparameters for gradient boosting models, and generated competition-ready submission format for Kaggle Optiver Trading competition
-
-**Option 3 - Concise Impact Focus (Recommended for One-Line Resume):**
-- **Engineered ensemble ML model** (LightGBM + XGBoost) for realized volatility prediction on **4.18M financial time-series samples**, achieving **3.33% RMSPE** with leakage-safe feature design and time-based cross-validation
-- **Implemented 27 quantitative features** including rolling statistics, lag variables, and return metrics for financial forecasting, ensuring temporal integrity through proper data shifting and time-series validation
-- **Delivered production-ready pipeline** processing **5.24M market observations**, training ensemble models with 80/20 temporal split on Optiver competition data, generating valid Kaggle submission format
-
 ### Key Technical Decisions
 1. **Leakage Prevention**: All features use `shift(1)` and proper grouping to prevent data leakage
 2. **Time-Based Split**: 80/20 temporal split respects time ordering for realistic validation
@@ -197,7 +178,3 @@ Results on validation set (1.06M samples):
 - Ensemble method improves robustness over single models
 - Production-ready pipeline with valid submission format
 - Handles large-scale time-series data efficiently
-
-## License
-
-MIT
