@@ -1,3 +1,59 @@
-*.csv
+# Virtual Environment
 venv/
+env/
+ENV/
+
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pkl
+*.joblib
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Data & Models
+*.csv
+!example_test_files/*.csv
+data/
+models/
+*.h5
+*.hdf5
+
+# Model files
+*.txt
+!requirements.txt
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Logs
+*.log
+
+# Outputs
+submission*.csv
+*.png
+*.pdf
+lgb_model.txt
+xgb_model.json
+feature_cols.pkl
+
+# Ignore test outputs
+test_*.csv
+
+# Ignore results (contains actual data)
+results.json
+
+# Ignore notebook checkpoints
+.ipynb_checkpoints/
