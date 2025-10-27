@@ -20,8 +20,8 @@ optiver_timeseries/
 ├── optiver_production.ipynb    # Jupyter notebook version
 ├── requirements.txt             # Python dependencies
 ├── README.md                    # Documentation
-├── data/                        # Training data (add your files here)
-│   └── train.csv                # Excluded (due to size)
+├── data/                        # Training data (excluded due to size)
+│   └── train.csv                
 ```
 
 ## Features
