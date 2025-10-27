@@ -18,8 +18,9 @@ __pycache__/
 # Data & Models
 *.csv
 !example_test_files/*.csv
-data/
-models/
+data/train.csv
+data/test.csv
+data/*.csv
 *.h5
 *.hdf5
 
