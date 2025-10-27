@@ -21,11 +21,7 @@ optiver_timeseries/
 ├── requirements.txt             # Python dependencies
 ├── README.md                    # Documentation
 ├── data/                        # Training data (add your files here)
-│   └── train.csv
-├── example_test_files/          # Test data
-│   ├── test.csv
-│   └── sample_submission.csv
-└── venv/                        # Virtual environment
+│   └── train.csv                # Excluded (due to size)
 ```
 
 ## Features
